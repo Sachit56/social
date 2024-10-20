@@ -6,3 +6,4 @@ export interface Post {
     like_count: number;
     repost_count: number;
 }
+

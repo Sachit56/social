@@ -7,9 +7,8 @@ import LandingPage from "@/pages/LandingPage";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 
-
 export default function Auth() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<unknown | null>(null); 
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -39,13 +38,12 @@ export default function Auth() {
 
   useEffect(() => {
     const fetchSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setUser(session?.user ?? null);
+      const { data } = await supabase.auth.getSession();
+      setUser(data?.session?.user || null); 
     };
 
     fetchSession();
   }, []);
-
 
   return (
     <div className="flex flex-col justify-between items-center gap-5 mt-10">
@@ -55,13 +53,9 @@ export default function Auth() {
         <>
           <Button onClick={githubLogin}>Login with GitHub</Button>
           <Button onClick={googleLogin}>Login with Google</Button>
-
           <Button onClick={() => navigate("/docs")}>Docs</Button>
-
         </>
       )}
     </div>
   );
 }
-
-
