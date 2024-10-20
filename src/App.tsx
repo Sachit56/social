@@ -8,8 +8,9 @@ const App: React.FC = () => {
   return (
     
     <Router>
-      <Auth/>
+      
       <Routes>
+        <Route path="/" element={<Auth />} />
         <Route path="/docs" element={<ProjectDocumentation/>} />
       </Routes>
     </Router>
