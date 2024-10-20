@@ -5,12 +5,16 @@ import supabase from "@/utils/supabase";
 import { Button } from "@/components/ui/button";
 import LandingPage from "@/pages/LandingPage";
 import { useToast } from "@/hooks/use-toast";
-import { useNavigate } from "react-router-dom";
 
 export default function Auth() {
   const [user, setUser] = useState<unknown | null>(null); 
+  const [docs,setdocs] = useState(false);
+
   const { toast } = useToast();
-  const navigate = useNavigate();
+  
+  const showDocs = () => {
+    setdocs(prev => !prev)
+}
 
   const githubLogin = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
@@ -53,7 +57,13 @@ export default function Auth() {
         <>
           <Button onClick={githubLogin}>Login with GitHub</Button>
           <Button onClick={googleLogin}>Login with Google</Button>
-          <Button onClick={() => navigate("/docs")}>Docs</Button>
+          <Button onClick={showDocs}>Docs</Button>
+
+          {docs && (
+            <div className="docs-content mt-5 p-4 border rounded-lg">
+              <h2>Documentation</h2>
+            </div>
+          )}
         </>
       )}
     </div>
