@@ -3,12 +3,13 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
-  },
+    "scripts": {
+      "dev": "bun vite",
+      "build": "bun run tsc -b && bun run vite build", 
+      "lint": "bun eslint .",
+      "preview": "bun vite preview" 
+    },
+  
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-dialog": "^1.1.2",
