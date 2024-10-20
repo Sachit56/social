@@ -7,7 +7,7 @@ const Logout = async() => {
         console.error("Error signing out:", error);
         return;
     }
-    window.location.href = '/login';
+    window.location.href = '/';
 
 }
 
