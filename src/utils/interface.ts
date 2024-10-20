@@ -7,3 +7,9 @@ export interface Post {
     repost_count: number;
 }
 
+
+export interface User {
+    id: string;
+    name: string;
+    email: string;
+  }

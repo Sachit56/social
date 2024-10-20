@@ -6,9 +6,10 @@ import { Button } from "@/components/ui/button";
 import LandingPage from "@/pages/LandingPage";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
+import { User } from "@/utils/interface";
 
 export default function Auth() {
-  const [user, setUser] = useState<unknown | null>(null); 
+  const [user, setUser] = useState<User | null>(null); 
   const { toast } = useToast();
   const navigate = useNavigate();
 
