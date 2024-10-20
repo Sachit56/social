@@ -47,23 +47,32 @@ export default function Auth() {
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100 p-4">
-      <div className="max-w-md w-full p-6 shadow-lg rounded-lg">
-        {user ? (
-          <LandingPage />
-        ) : (
+      {user ? (
+        <LandingPage />
+      ) : (
+        <div className="max-w-md w-full p-6 shadow-lg rounded-lg">
           <div className="flex flex-col gap-4">
-            <Button onClick={githubLogin} className="w-full bg-gray-800 text-white hover:bg-gray-700">
+            <Button
+              onClick={githubLogin}
+              className="w-full bg-gray-800 text-white hover:bg-gray-700 transition duration-300"
+            >
               Login with GitHub
             </Button>
-            <Button onClick={googleLogin} className="w-full bg-blue-500 text-white hover:bg-blue-400">
+            <Button
+              onClick={googleLogin}
+              className="w-full bg-blue-500 text-white hover:bg-blue-400 transition duration-300"
+            >
               Login with Google
             </Button>
-            <Button onClick={() => navigate("/docs")} className="w-full bg-green-500 text-white hover:bg-green-400">
+            <Button
+              onClick={() => navigate("/docs")}
+              className="w-full bg-green-500 text-white hover:bg-green-400 transition duration-300"
+            >
               Docs
             </Button>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
