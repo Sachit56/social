@@ -33,7 +33,7 @@ interface CreatePostProps {
 
 export default function CreatePost({ open, onClose, onPostCreated }: CreatePostProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null); // Local state for the file
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
