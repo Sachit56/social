@@ -87,20 +87,6 @@ const ProjectDocumentation: React.FC = () => {
 
       <h3 className="font-semibold">Supabase Integration:</h3>
       <p>Supabase is used to fetch posts and handle like/repost updates in the database.</p>
-      <pre className="bg-gray-200 p-2 rounded">
-        <code>
-          {`const fetchItems = async () => {
-            setLoading(true);
-            const { data, error: fetchError } = await supabase.from('social_media').select('*');
-            if (fetchError) {
-              setError(fetchError.message);
-            } else {
-              setItems(data || []);
-            }
-            setLoading(false);
-          };`}
-        </code>
-      </pre>
     </div>
   );
 };
