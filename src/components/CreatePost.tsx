@@ -72,7 +72,7 @@ export default function CreatePost({ open, onClose, onPostCreated }: CreatePostP
         onPostCreated();
         onClose();
         form.reset();
-        setSelectedFile(null); // Reset the file selection after submission
+        setSelectedFile(null); 
       }
     } catch (error) {
       console.error("Error creating post:", error);
@@ -128,8 +128,8 @@ export default function CreatePost({ open, onClose, onPostCreated }: CreatePostP
                       onChange={(e) => {
                         const file = e.target.files?.[0];
                         if (file) {
-                          setSelectedFile(file); // Store the selected file
-                          form.setValue("image", file); // This can be used for validation if needed
+                          setSelectedFile(file); 
+                          form.setValue("image", file);
                         }
                       }}
                     />

@@ -12,7 +12,6 @@ import { ThumbsUp, Repeat } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import { ModeToggle } from "@/components/ModeToggle"
 
-// Post interface definition
 interface Post {
   id: number
   title: string
@@ -31,7 +30,6 @@ export default function LandingPage() {
   const [likedPosts, setLikedPosts] = useState<number[]>([])
   const [repostedPosts, setRepostedPosts] = useState<number[]>([])
 
-  // Load liked posts and reposted posts from localStorage
   useEffect(() => {
     const savedLikes = JSON.parse(localStorage.getItem("likedPosts") || "[]")
     const savedReposts = JSON.parse(localStorage.getItem("repostedPosts") || "[]")
@@ -65,14 +63,12 @@ export default function LandingPage() {
 
     const newLikeCount = postToUpdate.like_count + (hasLiked ? -1 : 1)
 
-    // Optimistically update the UI
     setItems(prevItems => 
       prevItems.map(item => 
         item.id === id ? { ...item, like_count: newLikeCount } : item
       )
     )
 
-    // Toggle like in state
     const updatedLikedPosts = hasLiked 
       ? likedPosts.filter(postId => postId !== id)
       : [...likedPosts, id]
@@ -80,7 +76,6 @@ export default function LandingPage() {
     setLikedPosts(updatedLikedPosts)
     localStorage.setItem("likedPosts", JSON.stringify(updatedLikedPosts))
 
-    // Send like count to the API
     const { error } = await supabase
       .from('social_media')
       .update({ like_count: newLikeCount })
@@ -88,7 +83,6 @@ export default function LandingPage() {
 
     if (error) {
       console.error("Error updating like count:", error)
-      // Revert the optimistic update on failure
       setItems(prevItems =>
         prevItems.map(item =>
           item.id === id ? { ...item, like_count: postToUpdate.like_count } : item
@@ -106,7 +100,6 @@ export default function LandingPage() {
     const postToUpdate = items.find(item => item.id === id)
     if (!postToUpdate) return
 
-    // Optimistically update the UI by moving reposted item to the top
     setItems(prevItems => {
       const repostedItem = { ...postToUpdate, repost_count: postToUpdate.repost_count + 1 }
       return [repostedItem, ...prevItems.filter(item => item.id !== id)]
@@ -116,13 +109,12 @@ export default function LandingPage() {
     setRepostedPosts(updatedRepostedPosts)
     localStorage.setItem("repostedPosts", JSON.stringify(updatedRepostedPosts))
 
-    // Upload new post as repost to Supabase
     const { error } = await supabase
       .from('social_media')
       .insert({
         title: postToUpdate.title,
         image: postToUpdate.image,
-        content: postToUpdate.content, // Include content in repost
+        content: postToUpdate.content,
         like_count: 0,
         repost_count: 0,
       })
@@ -139,7 +131,7 @@ export default function LandingPage() {
 
   const handlePostCreated = () => {
     fetchItems()
-    setIsModalOpen(false) // Close the modal after creating a post
+    setIsModalOpen(false)
   }
 
   if (loading) {
