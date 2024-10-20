@@ -46,7 +46,7 @@ export default function Auth() {
   }, []);
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100 p-4">
+    <div className="flex flex-col justify-between items-center gap-5 mt-10">
       {user ? (
         <LandingPage />
       ) : (
